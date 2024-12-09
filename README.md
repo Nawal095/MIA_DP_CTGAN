@@ -27,15 +27,15 @@ pip install dp-cgans
 
 ### Step 1:
 
-Go to the ```dp_cgan.py``` file in the site packages directory. (Can be found in ```/path/to/environment/directory/lib/python3.9/site-packages/dp_cgans/synthesizers/dp_cgan.py```. You can find the ```path/to/environment/directory``` by running ```which python``` (for kinux/mac) or ```where python``` (for windows) on the terminal)
-
-   - Add the following line after ```line 721```.
+   - Run the following command:
 
       ```bash
-      epsilon = 1
+      bash ./scripts/epsilon-patch.sh <desired-epsilon-value>
       ```
 
-   - Replace ```1``` with your desired ```epsilon``` value, e.g., 0.001, 5, 10 etc.
+   - This command will show you a ```File Path```. When asked to input **File-Path** in the prompt, simply copy and paste the provided ```File Path``` here.
+
+   - This step injects the epsilon value into the package directly. The package uses ```get_privacy_spent(orders, rdp, target_eps=None, target_delta=None)``` function to calculate ```epsilon``` when ```delta``` is provided. It computes delta (or eps) for given eps (or delta) from RDP values. By default, it was taking default ```delta``` value and calculating the ```epsilon``` value. We just reversed it to calculate ```delta``` value based on our given ```epsilon``` value.
 
 ### Step 2:
 
